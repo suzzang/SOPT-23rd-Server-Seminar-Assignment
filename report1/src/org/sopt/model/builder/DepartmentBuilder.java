@@ -28,7 +28,7 @@ public class DepartmentBuilder extends UniversityBuilder {
         return this;
     }
 
-    public Department build(){
-        return new Department(super.build().getUniv_num(),super.build().getUniv_name(),super.build().getUniv_phone(),super.build().getUniv_address(),this.department_num,this.department_phone,this.department_phone,this.department_type);
+    public Department build() {
+        return new Department(super.build().getUniv_num(), super.build().getUniv_name(), super.build().getUniv_phone(), super.build().getUniv_address(), this.department_num, this.department_phone, this.department_phone, this.department_type);
     }
 }

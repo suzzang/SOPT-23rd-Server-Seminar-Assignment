@@ -2,7 +2,7 @@ package org.sopt.model.builder;
 
 import org.sopt.model.Professor;
 
-public class ProfessorBuilder extends DepartmentBuilder{
+public class ProfessorBuilder extends DepartmentBuilder {
     private int professor_num;
     private String professor_name;
     private String professor_dept;
@@ -34,10 +34,10 @@ public class ProfessorBuilder extends DepartmentBuilder{
         return this;
     }
 
-    public Professor build(){
-        return new Professor(super.build().getUniv_num(),super.build().getUniv_name(),super.build().getUniv_phone(),super.build().getUniv_address(),
-                super.build().getDepartment_num(),super.build().getDepartment_name(),super.build().getDepartment_phone(),super.build().getDepartment_type(),
-                this.professor_num,this.professor_name,this.professor_dept,this.professor_phone,this.professpr_subj);
+    public Professor build() {
+        return new Professor(super.build().getUniv_num(), super.build().getUniv_name(), super.build().getUniv_phone(), super.build().getUniv_address(),
+                super.build().getDepartment_num(), super.build().getDepartment_name(), super.build().getDepartment_phone(), super.build().getDepartment_type(),
+                this.professor_num, this.professor_name, this.professor_dept, this.professor_phone, this.professpr_subj);
 
     }
 }

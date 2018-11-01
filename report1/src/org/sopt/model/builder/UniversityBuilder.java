@@ -28,7 +28,7 @@ public class UniversityBuilder {
         return this;
     }
 
-    public University build(){
-        return new University(this.univ_num,this.univ_name,this.univ_phone,this.univ_address);
+    public University build() {
+        return new University(this.univ_num, this.univ_name, this.univ_phone, this.univ_address);
     }
 }

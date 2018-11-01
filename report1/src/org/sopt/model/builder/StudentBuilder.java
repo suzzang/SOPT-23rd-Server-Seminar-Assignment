@@ -53,9 +53,9 @@ public class StudentBuilder extends DepartmentBuilder {
         return this;
     }
 
-    public Student build(){
-        return new Student(super.build().getUniv_num(),super.build().getUniv_name(),super.build().getUniv_phone(),super.build().getUniv_address(),
-                super.build().getDepartment_num(),super.build().getDepartment_name(),super.build().getDepartment_phone(),super.build().getDepartment_type(),
-                this.student_num,this.student_name,this.student_grade,this.student_dept,this.student_email,this.student_address,this.student_age,this.student_state);
+    public Student build() {
+        return new Student(super.build().getUniv_num(), super.build().getUniv_name(), super.build().getUniv_phone(), super.build().getUniv_address(),
+                super.build().getDepartment_num(), super.build().getDepartment_name(), super.build().getDepartment_phone(), super.build().getDepartment_type(),
+                this.student_num, this.student_name, this.student_grade, this.student_dept, this.student_email, this.student_address, this.student_age, this.student_state);
     }
 }

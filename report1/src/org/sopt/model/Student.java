@@ -37,7 +37,6 @@ public class Student extends Department {
     }
 
 
-
     public int getStudent_num() {
         return student_num;
     }
