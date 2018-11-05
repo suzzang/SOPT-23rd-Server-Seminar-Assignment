@@ -3,6 +3,8 @@ package org.sopt.report2.api;
 import org.sopt.report2.model.User;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,36 +13,47 @@ import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 @RestController
 public class UserController {
     private final static List<User> userList = new LinkedList<>();
-    User user1 = new User(1610408,"최수정","서버");
-    User user2 = new User(1510408,"최뚜띠","안드로이드");
-    User user3 = new User(1410408,"최수똥","iOS");
-    User user4 = new User(1310408,"최냥냥","디자인");
-    User user5 = new User(1210408,"최몽몽","기획");
+    User user1 = new User(1610408, "최수정", "서버");
+    User user2 = new User(1510408, "최뚜띠", "안드로이드");
+    User user3 = new User(1410408, "최수똥", "iOS");
+    User user4 = new User(1310408, "최냥냥", "디자인");
+    User user5 = new User(1210408, "최몽몽", "기획");
 
 
     @GetMapping("/")
-    public String getCurrentTime(){
-        return "시간";
+    public String getCurrentTime() {
+        Calendar calendar = Calendar.getInstance();
+        java.util.Date date = calendar.getTime();
+        String today = (new SimpleDateFormat("yyyyMMddHHmmss").format(date));
+
+        return today;
     }
 
     @GetMapping("/users")
-    public List<User> getUserList(){ 
+    public List<User> getUserListandSearchByNameORPart(@RequestParam(value = "name",required = false) final String name) {
         userList.add(user1);
         userList.add(user2);
         userList.add(user3);
         userList.add(user4);
         userList.add(user5);
+        List<User> resultList = new LinkedList<>();
 
-        if(userList.isEmpty()){
-            return null;
-        }else {
-            return userList;
+        for (User u : userList) {
+            if (u.getName() == name) {
+
+                resultList.add(u);
+                return resultList;
+            }
+
         }
+
+        return resultList;
     }
-//    @GetMapping("/users")
+
 //    public String searchSameName(@RequestParam(value = "name")final String name){
 //        return "Dd"; //for문 돌려가면서 비교 검색
 //    }
+
 //    @GetMapping("/users")
 //    public String searchSamePart(@RequestParam(value = "part")final String part){
 //        return "Dd"; //for문 돌려가면서 비교 검색
@@ -62,4 +75,5 @@ public class UserController {
 //    public List<User> deleteUser(@PathVariable(value = "user_idx")final int user_idx){
 //        return userList; //해당 유저인덱스의 유저객체 삭제하고 유저리스트 다시 리턴
 //    }
+
 }
