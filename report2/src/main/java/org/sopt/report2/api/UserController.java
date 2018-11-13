@@ -22,6 +22,8 @@ public class UserController {
     User user5 = new User(1210408, "최몽몽", "기획");
     User user6 = new User(1110408, "최몽땅", "기획");
 
+    User empty = new User(-1,"없습니다","없습니다");
+
 
 
     @GetMapping("/")
@@ -49,20 +51,30 @@ public class UserController {
         }
 
         if(name.isPresent()){
+            int name_flag = 0;
             List<User> byNameList = new LinkedList<>();
             for (User u : userList) {
                 if (u.getName().equals(name.get())) { //Optional 쓸 때 객체안의 String 값을 가져오기위해 get()메소드를 쓴다
                     byNameList.add(u);
+                    name_flag++;
                 }
+            }
+            if(name_flag==0){
+                byNameList.add(empty);
             }
             return byNameList;
         }else{
             if(part.isPresent()){
+                int part_flag = 0;
                 List<User> byPartList = new LinkedList<>();
                 for(User u : userList){
                     if (u.getPart().equals(part.get())){
                         byPartList.add(u);
+                        part_flag++;
                     }
+                }
+                if(part_flag==0){
+                    byPartList.add(empty);
                 }
                 return byPartList;
             }else{
@@ -76,14 +88,42 @@ public class UserController {
     }
 
 
-//    @GetMapping("/users/{user_idx}")
-//    public String searchSameId(@PathVariable(value = "user_idx")final int user_idx){
-//        return "Dd";
-//    }
-//    @PostMapping("/users")
-//    public List<User> saveUser(){
-//        return userList;//새로 저장된 리스트 출력
-//    }
+    @GetMapping("/users/{user_idx}")
+    public List<User> searchSameId(@PathVariable(value = "user_idx")final int user_idx){
+        if(userList.isEmpty()){
+
+            userList.add(user1);
+            userList.add(user2);
+            userList.add(user3);
+            userList.add(user4);
+            userList.add(user5);
+            userList.add(user6);
+
+        }
+
+        int idx_flag = 0;
+        List<User>idx_List = new LinkedList<>();
+
+        for(User u : userList){
+            if(u.getUser_idx()==user_idx){
+                idx_List.add(u);
+                idx_flag++;
+            }
+        }
+        if(idx_flag==0){
+            idx_List.add(empty);
+        }
+        return idx_List;
+
+    }
+
+
+    @PostMapping("/users")
+    public List<User> saveUser(){
+        return userList;//새로 저장된 리스트 출력
+    }
+
+
 //    @PutMapping("/users/{user_idx}")
 //    public User updateUser(@PathVariable(value = "user_idx")final int user_idx){
 //        return userList.get(user_idx); //해당 인덱스의 유저를 뽑아와서 수정함 그리고 나서 그 유저 객체만 리턴
