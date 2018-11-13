@@ -78,9 +78,8 @@ public class UserController {
                 }
                 return byPartList;
             }else{
-                List<User> resultList = new LinkedList<>();
-                resultList = userList;
-                return resultList;
+
+                return userList;
             }
 
         }
@@ -119,18 +118,66 @@ public class UserController {
 
 
     @PostMapping("/users")
-    public List<User> saveUser(){
+    public List<User> saveUser(@RequestBody final User user){
+        if(userList.isEmpty()){
+
+            userList.add(user1);
+            userList.add(user2);
+            userList.add(user3);
+            userList.add(user4);
+            userList.add(user5);
+            userList.add(user6);
+
+        }
+
+        userList.add(user);
+
         return userList;//새로 저장된 리스트 출력
     }
 
 
-//    @PutMapping("/users/{user_idx}")
-//    public User updateUser(@PathVariable(value = "user_idx")final int user_idx){
-//        return userList.get(user_idx); //해당 인덱스의 유저를 뽑아와서 수정함 그리고 나서 그 유저 객체만 리턴
-//    }
-//    @DeleteMapping("/users/{user_idx}")
-//    public List<User> deleteUser(@PathVariable(value = "user_idx")final int user_idx){
-//        return userList; //해당 유저인덱스의 유저객체 삭제하고 유저리스트 다시 리턴
-//    }
+    @PutMapping("/users/{user_idx}")
+    public List<User> updateUser(@PathVariable(value = "user_idx")final int user_idx,
+                           @RequestBody final User user){
+        if(userList.isEmpty()){
+
+            userList.add(user1);
+            userList.add(user2);
+            userList.add(user3);
+            userList.add(user4);
+            userList.add(user5);
+            userList.add(user6);
+
+        }
+
+        for(User u : userList){
+            if(u.getUser_idx() == user_idx){
+                userList.remove(u);
+
+            }
+        }
+        userList.add(user);
+        return userList; //수정된 유저정보를 가진 리스트를 다시 출력
+    }
+
+    @DeleteMapping("/users/{user_idx}")
+    public List<User> deleteUser(@PathVariable(value = "user_idx")final int user_idx){
+        if(userList.isEmpty()){
+
+            userList.add(user1);
+            userList.add(user2);
+            userList.add(user3);
+            userList.add(user4);
+            userList.add(user5);
+            userList.add(user6);
+
+        }
+        for(User u : userList){
+            if(u.getUser_idx() == user_idx){
+                userList.remove(u);
+            }
+        }
+        return userList;
+    }
 
 }
